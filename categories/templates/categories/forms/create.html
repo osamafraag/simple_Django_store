@@ -1,0 +1,14 @@
+{% extends 'store/layouts/base.html' %}
+{% load static %}
+{% block title %}
+  <title>create category</title>
+{% endblock %}
+{% block container %}
+<h1> Add new Category  </h1>
+<form method="post"  enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<script src="{% static  'categories/js/script.js' %}"></script>
+{% endblock %}

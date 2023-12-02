@@ -1,0 +1,13 @@
+{% extends 'store/layouts/base.html' %}
+{% load static %}
+{% block title %}Delete Account {% endblock %}
+{% block container %}
+    <h1> Delete Account  </h1>
+    <form method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <p class="form-control"> Are you want to delete your accont ? </p>
+        <button type="submit" class="btn btn-danger">Submit</button>
+    </form>
+    <a href="{% url 'account.profile' %}" class="btn btn-dark">Cancel</a> 
+    <script src="{% static  'categories/js/script.js' %}"></script>
+{% endblock %}

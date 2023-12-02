@@ -1,0 +1,30 @@
+{% extends 'store/layouts/base.html' %}
+{% load static %}
+{% block title %}
+  <title>categories</title>
+{% endblock %}
+  {% block nav %}
+  <li class="nav-item my-auto" style="margin-left: 500px; margin-right: 20px;">
+    <a class="nav-link text-light btn rounded bg-primary" href="{% url 'category.create' %}">
+      Add Category <i class="fa-regular fa-square-plus"></i>
+    </a>
+  </li>
+  {% endblock %}
+  {% block container %}
+    {% for category in categories %}
+      <div class="card text-black col-2 m-2 shadow">
+        <img src="{{category.image_url}}" class="ard-img-top mx-auto m-2 w-100 h-50"/>
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{category.name}}</h5>
+          <p>{{category.description}}</p>
+          <div class="row">
+            <a class="btn btn-success col m-2" href="{{category.details_url}}">show <i class="fa-solid fa-eye"></i></a>
+          </div>
+          <div class="row mx-auto">
+            <a class="btn btn-danger col-5 m-1" href="{{category.delete_url}}"><i class="fa-solid fa-trash-can"></i></a>
+            <a class="btn btn-info col-5 m-1" href="{{category.edit_url}}"><i class="fa-solid fa-pen-to-square"></i></a>
+          </div>
+        </div>
+      </div> 
+    {% endfor %}
+  {% endblock %}

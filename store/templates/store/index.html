@@ -1,0 +1,38 @@
+{% extends 'store/layouts/base.html' %}
+{% load static %}
+{% block title %}
+  <title>products list</title>
+{% endblock %}
+  {% block nav %}
+  <li class="nav-item my-auto me-5" style="margin-left: 250px;">
+    <a class="nav-link text-light btn rounded bg-primary" href="{% url 'product.create' %}">
+      Add Product <i class="fa-regular fa-square-plus"></i>
+    </a>
+  </li>
+  <li class="nav-item my-auto d-flex">
+    <form method="post"  enctype="multipart/form-data" class="my-auto text-light">
+      {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+  </li>
+  {% endblock %}
+  {% block container %}
+    {% for product in products %}
+      <div class="card text-black col-3 m-2 shadow">
+        <img src="{{product.image_url}}" class="ard-img-top mx-auto m-2 w-100 h-50"/>
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="text-primary fw-bold">{{product.price}} $</p>
+          <p>{{product.created_at}}</p>
+          <div class="row">
+            <a class="btn btn-success col m-2" href="{{product.details_url}}">show <i class="fa-solid fa-eye"></i></a>
+          </div>
+          <div class="row mx-auto">
+            <a class="btn btn-danger col-6 me-2" href="{{product.delete_url}}"><i class="fa-solid fa-trash-can"></i></a>
+            <a class="btn btn-info col-5" href="{{product.edit_url}}"><i class="fa-solid fa-pen-to-square"></i></a>
+          </div>
+        </div>
+      </div> 
+    {% endfor %}
+  {% endblock %}

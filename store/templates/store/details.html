@@ -1,0 +1,53 @@
+{% extends 'store/layouts/base.html' %}
+{% load static %}
+{% block title %}
+  <title>product details</title>
+{% endblock %}
+{% block nav %}
+<li class="nav-item my-auto" style="margin-left: 600px; margin-right: 20px;">
+  <a class="nav-link text-light btn rounded bg-primary" href="{% url 'product.create' %}">
+    Add Product <i class="fa-regular fa-square-plus"></i>
+  </a>
+</li>
+{% endblock%}
+{% block container %}
+<div class="row">
+  <div class="col-9 row mt-2  justify-content-center">
+    <div class="fs-3 border border-dark rounded w-50 d-flex" style="height: 50px;">
+      <span class="ms-3">Category :</span>
+      <a class="btn btn-success my-auto ms-5" href="{{product.category.details_url}}">{{product.category}}</a> 
+    </div>
+    <div class="card text-black col-6 m-2">
+      <div class="row">
+        <img src="{{product.image_url}}" class="card-img-left mx-auto m-2 col-7"/>
+        <div class="card-body col-5 my-auto">
+          {% if product.instock %}
+            <div class="btn btn-success mb-3">In stock</div>
+          {% else %}
+            <div class="btn btn-danger mb-3">Out stock</div>
+          {% endif %}
+          <h5 class="card-title my-auto">{{product.name}}</h5>
+          <p class="text-primary fw-bold">{{product.price}} $</p>
+          <p>{{product.description}}</p>
+          <p>{{product.created_at}}</p>
+          <a class="btn btn-success mt-5 w-100" href="{% url 'index'%}">Back To list</a>
+          <div class="row mx-auto mt-2">
+            <a class="btn btn-danger col-7 me-2" href="{{product.delete_url}}"><i class="fa-solid fa-trash-can"></i></a>
+            <a class="btn btn-info col-4" href="{{product.edit_url}}"><i class="fa-solid fa-pen-to-square"></i></a>
+          </div>
+        </div>
+      </div>    
+    </div> 
+  </div>
+  <div class="col-3 justify-content-center" >
+    <h3 class="mx-auto">Related Items</h3><hr/>
+    <div class="row justify-content-center">
+    {% for prd in product.category.products.all %}
+    {% if prd.id != student.id %}
+        <a href="{{prd.details_url}}" class="col col-4 m-2 btn btn-primary">{{prd.name}}</a> 
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock %}

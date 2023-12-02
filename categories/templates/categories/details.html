@@ -1,0 +1,38 @@
+{% extends 'store/layouts/base.html' %}
+{% load static %}
+{% block title %}
+  <title>category details</title>
+{% endblock %}
+{% block nav %}
+  <li class="nav-item my-auto" style="margin-left: 600px; margin-right: 20px;">
+    <a class="nav-link text-light btn rounded bg-primary" href="{% url 'product.create' %}">
+      Add Product <i class="fa-regular fa-square-plus"></i>
+    </a>
+  </li>
+{% endblock %}
+{% block container %}
+<div class="d-flex" >
+  <div class="row mt-2 container justify-content-center mx-auto">
+    <div class="card text-black col-6 m-2">
+      <div class="row">
+        <img src="{{category.image_url}}" class="card-img-left mx-auto m-2 col-7"/>
+        <div class="card-body col-5 my-auto">
+          <h5 class="card-title my-auto">{{category.name}}</h5>
+          <p>{{category.description}}</p>
+          <a class="btn btn-success mt-5 w-100" href="{% url 'category.index' %}">Back To Home</a>
+          <div class="row mx-auto mt-2">
+            <a class="btn btn-danger col-7 me-2" href="{{category.delete_url}}"><i class="fa-solid fa-trash-can"></i></a>
+            <a class="btn btn-info col-4" href="{{category.edit_url}}"><i class="fa-solid fa-pen-to-square"></i></a>
+          </div>
+        </div>
+      </div>    
+    </div> 
+  </div>
+  <div>
+    <h4>Products List</h4>
+    {% for prd in category.products.all %}
+      <a href="{{prd.details_url}}" class="m-2 btn btn-primary">{{prd.name}}</a> 
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
